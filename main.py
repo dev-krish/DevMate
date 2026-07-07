@@ -1,30 +1,31 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
-from telegram.ext import MessageHandler, filters
-import os
-from dotenv import load_dotenv
+from telegram.ext import (
+    ApplicationBuilder,
+    CommandHandler,
+    MessageHandler,
+    filters,
+)
 
-load_dotenv()
+from config import BOT_TOKEN
 
-TOKEN =os.getenv("BOT_TOKEN")
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "Hello! I'm your first Telegram bot 🚀"
-    )
+from handlers.start import start
+from handlers.help import help_command
+from handlers.echo import echo
+from handlers.help import help_command
+from handlers.about import about
+from handlers.ping import ping
 
-app = ApplicationBuilder().token(TOKEN).build()
+app = ApplicationBuilder().token(BOT_TOKEN).build()
 
+# Commands
 app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("hello", help_command))
+app.add_handler(CommandHandler("help", help_command))
+app.add_handler(CommandHandler("about", about))
+app.add_handler(CommandHandler("ping", ping))
 
-async def hello(update, context):
-    await update.message.reply_text("Hello Krish!")
+# Messages
+app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
-app.add_handler(CommandHandler("hello", hello))
-
-
-async def echo(update, context):
-    await update.message.reply_text(update.message.text)
-
-app.add_handler(MessageHandler(filters.TEXT, echo))
+print("🚀 DevMate is running...")
 
 app.run_polling()
