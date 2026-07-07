@@ -15,6 +15,7 @@ from handlers.about import about
 from handlers.ping import ping
 from handlers.tools import uuid_command
 from handlers.tools import password_command
+from handlers.tools import hash_command
 
 app = ApplicationBuilder().token(BOT_TOKEN).build()
 
@@ -26,6 +27,7 @@ app.add_handler(CommandHandler("about", about))
 app.add_handler(CommandHandler("ping", ping))
 app.add_handler(CommandHandler("uuid", uuid_command))
 app.add_handler(CommandHandler("password", password_command))
+app.add_handler(CommandHandler("hash", hash_command))
 
 # Messages
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
