@@ -8,17 +8,20 @@ from telegram.ext import (
 from config import BOT_TOKEN
 from logger import logger
 
-from handlers.start import start
-from handlers.help import help_command
-from handlers.echo import echo
-from handlers.chat import chat
-from handlers.about import about
-from handlers.ping import ping
+from handlers.info import (
+    start,
+    help_command,
+    about,
+)
+
 from handlers.tools import (
     uuid_command,
     password_command,
     hash_command,
+    echo,
+    ping,
 )
+
 from handlers.chat import chat
 
 def main():
@@ -32,6 +35,7 @@ def main():
     app.add_handler(CommandHandler("uuid", uuid_command))
     app.add_handler(CommandHandler("password", password_command))
     app.add_handler(CommandHandler("hash", hash_command))
+    app.add_handler(CommandHandler("echo",echo))
 
     app.add_handler(
         MessageHandler(filters.TEXT & ~filters.COMMAND, chat)

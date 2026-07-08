@@ -74,3 +74,11 @@ async def hash_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🔒 {algorithm.upper()}\n\n`{hashed}`",
         parse_mode="Markdown"
     )
+
+async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = " ".join(context.args[0:])
+    await update.message.reply_text(text)
+
+
+async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("🏓 Pong!\n\nStatus: Online ✅")
