@@ -18,7 +18,7 @@ from handlers.tools import (
     password_command,
     hash_command,
 )
-
+from handlers.ask import ask
 
 def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
@@ -36,6 +36,8 @@ def main():
         MessageHandler(filters.TEXT & ~filters.COMMAND, echo)
     )
 
+    app.add_handler(CommandHandler("ask", ask))
+    
     logger.info("🚀 DevMate started!")
 
     app.run_polling()
