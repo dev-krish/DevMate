@@ -8,29 +8,25 @@
 
 <div align="center">
 
-# 🤖 DevMate
+An AI-powered developer assistant for Telegram.
 
-**A developer-first Telegram bot built with Python to make everyday development tasks faster and easier.**
+Ask coding questions, generate passwords, create hashes, generate UUIDs, and chat with powerful AI models—all without leaving Telegram.
 
-Generate passwords • Hash text • Create UUIDs • More coming soon.
+Supports Gemini ☁️ and Ollama 🖥️ through a clean provider abstraction layer.
 
 </div>
 
-## ✨ Features
-
-| Feature | Status |
-|---------|--------|
-| UUID Generator | ✅ |
-| Password Generator | ✅ |
-| SHA-256 Hash | ✅ |
-| Ping | ✅ |
-| Help | ✅ |
-| Docker | ✅ |
-| Cloud Deployment | ✅ |
-| QR Generator | 🚧 |
-| GitHub API | 🚧 |
-| AI Commands | 🚧 |
-
+✨ Features
+🤖 AI-powered developer assistant
+🧠 Natural language conversations
+🔄 Switch between Gemini and Ollama
+🔐 Secure password generation
+🔒 SHA-256 hashing
+🆔 UUID generation
+🐳 Docker support
+☁️ Render deployment
+📝 Structured logging
+🧩 Modular architecture
 ## 🛠️ Tech Stack
 
 - Python 3.13

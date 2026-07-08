@@ -1,17 +1,32 @@
 from telegram import Update
 from telegram.ext import ContextTypes
+from telegram.constants import ParseMode
 
 async def about(update: Update, context: ContextTypes.DEFAULT_TYPE):
     about_text = """
-🤖 DevMate
+        🤖 <b>About DevMate</b>
 
-Your Developer Companion.
+        DevMate is an AI-powered developer assistant built to help developers directly inside Telegram.
 
-Built with ❤️ using Python.
+        ✨ <b>Features</b>
+        • AI-powered conversations
+        • Secure password generation
+        • SHA-256 hashing
+        • UUID generation
+        • Dockerized deployment
+        • Cloud deployment on Render
+        • Local AI support with Ollama
+        • Cloud AI support with Gemini
 
-Version: 0.1.0
+        🛠 <b>Tech Stack</b>
+        Python • python-telegram-bot • Docker • Gemini • Ollama
 
-Creator: Krishnendu Dutta
-"""
+        👨‍💻 Built with ❤️ by Krishnendu Dutta
 
-    await update.message.reply_text(about_text)
+        🚀 Version: v0.2.0
+        """
+
+    await update.message.reply_text(
+        about_text,
+        parse_mode=ParseMode.HTML,
+    )
