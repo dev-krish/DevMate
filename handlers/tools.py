@@ -46,19 +46,31 @@ async def password_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="Markdown"
     )
 
-async def hash_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-    if not context.args:
+
+async def hash_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if len(context.args) < 2:
         await update.message.reply_text(
-            "❌ Please provide some text.\n\nExample:\n/hash Hello DevMate"        )
+            "Usage:\n/hash <algorithm> <text>"
+        )
         return
 
-    text = " ".join(context.args)
+    algorithm = context.args[0].lower()
 
-    hashed = hashlib.sha256(text.encode()).hexdigest()
+    if algorithm not in hashlib.algorithms_guaranteed:
+        await update.message.reply_text(
+            "❌ Unsupported algorithm."
+        )
+        return
+
+    text = " ".join(context.args[1:])
+
+    hashed = hashlib.new(
+        algorithm,
+        text.encode()
+    ).hexdigest()
 
     await update.message.reply_text(
-        f"🔒 SHA256\n\n`{hashed}`",
+        f"🔒 {algorithm.upper()}\n\n`{hashed}`",
         parse_mode="Markdown"
     )
-
