@@ -11,6 +11,7 @@ from logger import logger
 from handlers.start import start
 from handlers.help import help_command
 from handlers.echo import echo
+from handlers.chat import chat
 from handlers.about import about
 from handlers.ping import ping
 from handlers.tools import (
@@ -18,7 +19,7 @@ from handlers.tools import (
     password_command,
     hash_command,
 )
-from handlers.ask import ask
+from handlers.chat import chat
 
 def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
@@ -33,11 +34,10 @@ def main():
     app.add_handler(CommandHandler("hash", hash_command))
 
     app.add_handler(
-        MessageHandler(filters.TEXT & ~filters.COMMAND, echo)
+        MessageHandler(filters.TEXT & ~filters.COMMAND, chat)
     )
 
-    app.add_handler(CommandHandler("ask", ask))
-    
+
     logger.info("🚀 DevMate started!")
 
     app.run_polling()

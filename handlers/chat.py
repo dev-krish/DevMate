@@ -4,15 +4,9 @@ from telegram.constants import ChatAction, ParseMode
 from logger import logger
 from services.ai_service import ask_ai
 
-async def ask(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-    if not context.args:
-        await update.message.reply_text(
-            "Usage:\n/ask <your question>"
-        )
-        return
-
-    prompt = " ".join(context.args)
+    prompt = update.message.text
 
     try:
 
