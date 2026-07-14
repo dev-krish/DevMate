@@ -3,18 +3,18 @@ from telegram.ext import ContextTypes
 from telegram.constants import ParseMode
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
+from services.conversation_service import clear_history
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat_id = update.effective_chat.id
+
+    clear_history(chat_id)
+    
     keyboard = [
         [
             InlineKeyboardButton(
                 "💬 Start Chat",
                 callback_data="start_chat",
-            )
-        ],
-        [
-            InlineKeyboardButton(
-                "🧹 Clear Memory",
-                callback_data="clear_memory",
             )
         ],
         [

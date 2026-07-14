@@ -27,6 +27,7 @@ from handlers.chat import chat
 from telegram.ext import CallbackQueryHandler
 
 from handlers.callbacks import button_callback
+from handlers.clear import clear
 
 def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
@@ -41,6 +42,9 @@ def main():
     app.add_handler(CommandHandler("hash", hash_command))
     app.add_handler(CommandHandler("echo",echo))
     app.add_handler(CallbackQueryHandler(button_callback))
+    app.add_handler(
+        CommandHandler("clear", clear)
+    )
 
     app.add_handler(
         MessageHandler(filters.TEXT & ~filters.COMMAND, chat)
