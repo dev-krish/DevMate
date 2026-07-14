@@ -25,19 +25,11 @@ async def button_callback(
                 parse_mode=ParseMode.HTML,
             )
 
-        case "clear_memory":
-            clear_history(chat_id)
-
-            await query.message.reply_text(
-                "🧹 <b>Conversation memory cleared.</b>\n\n"
-                "Let's start fresh! 🚀",
-                parse_mode=ParseMode.HTML,
-            )
-
         case "help":
             await query.message.reply_text(
                 "❓ <b>Quick Help</b>\n\n"
                 "• Simply send a message to chat with DevMate.\n"
+                "• Use /clear - Clear the current conversation memory"
                 "• Use /password to generate passwords.\n"
                 "• Use /hash to generate SHA-256 hashes.\n"
                 "• Use /uuid to generate UUIDs.",
