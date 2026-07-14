@@ -14,7 +14,7 @@ PROVIDERS = {
 }
 
 
-async def ask_ai(prompt: str) -> str:
+async def ask_ai(messages: list[dict]) -> str:
 
     provider = AI_PROVIDER.lower()
 
@@ -25,7 +25,7 @@ async def ask_ai(prompt: str) -> str:
 
     start = time.perf_counter()
 
-    answer = await PROVIDERS[provider](prompt)
+    answer = await PROVIDERS[provider](messages)
 
     elapsed = time.perf_counter() - start
 

@@ -13,16 +13,17 @@ def load_system_prompt():
 # This executes ONCE when the application starts
 SYSTEM_PROMPT = load_system_prompt()
 
-async def ask_ollama(prompt: str) -> str:
-
+async def ask_ollama(messages: list[dict]) -> str:
+        
     response = chat(
         model=OLLAMA_MODEL,
         messages=[
-            {
-                "role": "user",
-                "content": f"{SYSTEM_PROMPT}\n\nUser:\n{prompt}",
-            }
-        ]
+                    {
+                        "role": "system",
+                        "content": SYSTEM_PROMPT,
+                    },
+                    *messages,
+                ],
     )
 
     return response["message"]["content"]

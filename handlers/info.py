@@ -1,10 +1,44 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 from telegram.constants import ParseMode
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [
+            InlineKeyboardButton(
+                "💬 Start Chat",
+                callback_data="start_chat",
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                "🧹 Clear Memory",
+                callback_data="clear_memory",
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                "❓ Help",
+                callback_data="help",
+            )
+        ],
+    ]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    text="""
+        🤖 Welcome to DevMate!🚀
+
+        Your AI Developer Companion 🫂
+        Or Maybe Your Chat buddy ? 😉
+
+        Choose an option below 👇😃
+    """
     await update.message.reply_text(
-        "Hello! I'm DevMate 🚀"
+        text,
+        reply_markup=reply_markup,
+        parse_mode=ParseMode.HTML,
     )
 
 
