@@ -16,12 +16,22 @@ def load_system_prompt():
 
 # This executes ONCE when the application starts
 SYSTEM_PROMPT = load_system_prompt()
+    
+async def ask_gemini(messages: list[dict]) -> str:
+    conversation = SYSTEM_PROMPT + "\n\n"
 
+    for message in messages:
 
-async def ask_gemini(prompt: str) -> str:
+        if message["role"] == "user":
+            conversation += f"User: {message['content']}\n"
+
+        elif message["role"] == "assistant":
+            conversation += f"Assistant: {message['content']}\n"
+
+        conversation += "\nAssistant:"    
     response = client.models.generate_content(
         model="gemini-2.5-flash",
-        contents=f"{SYSTEM_PROMPT}\n\nUser:\n{prompt}",
+        contents=conversation,
     )
 
     return response.text
