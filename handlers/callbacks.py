@@ -20,8 +20,7 @@ async def button_callback(
         case "start_chat":
             await query.message.reply_text(
                 "💬 <b>Conversation Started!</b>\n\n"
-                "I'm ready to help.\n"
-                "Ask me anything about programming, AI, Docker, or software development.",
+                "Welcome! 🚀 I'm your digital co-pilot , DevMate!👋.\n\nI'm ready to help.\nWhether you need to crush your daily goals, debug a tricky piece of code, or just chat about life, I've got you covered.\n\nLet's have a Chat?💭",
                 parse_mode=ParseMode.HTML,
             )
 
@@ -29,7 +28,7 @@ async def button_callback(
             await query.message.reply_text(
                 "❓ <b>Quick Help</b>\n\n"
                 "• Simply send a message to chat with DevMate.\n"
-                "• Use /clear - Clear the current conversation memory"
+                "• Use /clear - Clear the current conversation memory. \n"
                 "• Use /password to generate passwords.\n"
                 "• Use /hash to generate SHA-256 hashes.\n"
                 "• Use /uuid to generate UUIDs.",

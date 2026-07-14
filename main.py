@@ -42,9 +42,7 @@ def main():
     app.add_handler(CommandHandler("hash", hash_command))
     app.add_handler(CommandHandler("echo",echo))
     app.add_handler(CallbackQueryHandler(button_callback))
-    app.add_handler(
-        CommandHandler("clear", clear)
-    )
+    app.add_handler(CommandHandler("clear", clear))
 
     app.add_handler(
         MessageHandler(filters.TEXT & ~filters.COMMAND, chat)
