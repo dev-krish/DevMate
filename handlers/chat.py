@@ -7,6 +7,9 @@ from services.conversation_service import (
     get_history,
     save_message,
 )
+
+from utils.formatter import sanitize_html
+
 async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
@@ -35,15 +38,15 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "assistant",
             answer,
         )
-
+        answer = sanitize_html(answer)
         await update.message.reply_text(
             answer,
             parse_mode=ParseMode.HTML,
         )
         
-    except Exception :
+    except Exception as e:
 
-        logger.exception("AI Request Failed")
+        logger.exception(f"AI Request Failed: {e}")
 
         await update.message.reply_text(
             "⚠️ Sorry! I couldn't contact the AI right now.\n"
