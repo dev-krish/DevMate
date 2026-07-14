@@ -29,6 +29,8 @@ from telegram.ext import CallbackQueryHandler
 from handlers.callbacks import button_callback
 from handlers.clear import clear
 
+from services.health_server import start_health_server
+
 def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
@@ -50,6 +52,8 @@ def main():
 
 
     logger.info("🚀 DevMate started!")
+
+    start_health_server()
 
     app.run_polling()
 
