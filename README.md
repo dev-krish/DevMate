@@ -1,201 +1,293 @@
 # 🤖 DevMate
 
-![Python](https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge&logo=python)
-![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker)
+<p align="center">
+  <img src="assets/logo.png" alt="DevMate Logo" width="180"/>
+</p>
+
+<p align="center">
+  <b>Your AI Developer Assistant on Telegram.</b><br>
+  Build, debug, learn and code smarter—right from your chat.
+</p>
+
+<p align="center">
+
+![Python](https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge\&logo=python)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge\&logo=docker)
+![Telegram](https://img.shields.io/badge/Telegram-Bot-26A5E4?style=for-the-badge\&logo=telegram)
+![Render](https://img.shields.io/badge/Render-Deployed-46E3B7?style=for-the-badge\&logo=render)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Render](https://img.shields.io/badge/Deployed%20on-Render-46E3B7?style=for-the-badge&logo=render)
-![Version](https://img.shields.io/badge/version-v0.1.0-orange?style=for-the-badge)
+![Version](https://img.shields.io/badge/v0.2.0-Live-orange?style=for-the-badge)
 
-<div align="center">
+</p>
 
-An AI-powered developer assistant for Telegram.
+---
 
-Ask coding questions, generate passwords, create hashes, generate UUIDs, and chat with powerful AI models—all without leaving Telegram.
+## ✨ Overview
 
-Supports Gemini ☁️ and Ollama 🖥️ through a clean provider abstraction layer.
+**DevMate** is an AI-powered Telegram bot designed to be your personal developer companion.
 
-</div>
+Instead of switching between websites, terminals, documentation, and AI chat applications, DevMate brings everything directly into Telegram.
 
-✨ Features
-🤖 AI-powered developer assistant
-🧠 Natural language conversations
-🔄 Switch between Gemini and Ollama
-🔐 Secure password generation
-🔒 SHA-256 hashing
-🆔 UUID generation
-🐳 Docker support
-☁️ Render deployment
-📝 Structured logging
-🧩 Modular architecture
-## 🛠️ Tech Stack
+Whether you're debugging code, asking programming questions, generating secure passwords, creating hashes, or simply learning a new technology, DevMate is always one message away.
 
-- Python 3.13
-- python-telegram-bot
-- Docker
-- Docker Compose
-- Render
-- Git & GitHub
+It supports multiple AI providers through a clean abstraction layer, allowing seamless switching between **Google Gemini** and **Ollama** without changing the application logic.
 
-## 🏗️ Architecture
+---
+
+# 🚀 Features
+
+* 🤖 AI-powered developer assistant
+* 💬 Natural conversational chat
+* 🧠 Per-chat conversation memory
+* 🔄 Multi-provider AI (Gemini & Ollama)
+* 🎛️ Interactive Telegram UI
+* 🧹 One-click conversation reset
+* 🔐 Secure password generation
+* 🔒 SHA-256 hashing
+* 🆔 UUID generation
+* 📝 Structured logging
+* 🏗️ Modular architecture
+* 🐳 Docker support
+* ☁️ Production-ready deployment
+
+---
+
+# 🛠 Tech Stack
+
+* Python 3.13
+* python-telegram-bot
+* Google Gemini API
+* Ollama
+* Docker
+* Docker Compose
+* Render
+* Git & GitHub
+
+---
+
+# 🏗 Architecture
 
 ```text
-                Telegram
+                     Telegram
 
-                    │
+                         │
 
-                    ▼
+                         ▼
 
-           python-telegram-bot
+               python-telegram-bot
 
-                    │
+                         │
 
-                    ▼
+          ┌──────────────┴──────────────┐
+          ▼                             ▼
 
-             handlers/chat.py
+      Command Handlers           Chat Handler
 
-                    │
+                         │
 
-                    ▼
+                         ▼
 
-          services/ai_service.py
+                Conversation Memory
 
-           ┌────────┴────────┐
-           │                 │
-           ▼                 ▼
+                         │
 
-     Gemini Service     Ollama Service
+                         ▼
 
-           │                 │
-           ▼                 ▼
+                 AI Provider Layer
 
-      Google Gemini      Local Llama/Qwen
+              ┌──────────┴──────────┐
+              ▼                     ▼
+
+        Gemini Provider      Ollama Provider
+
+              │                     │
+
+              ▼                     ▼
+
+      Google Gemini API       Local LLM
 ```
 
-DevMate follows a modular architecture where Telegram handlers remain independent of the underlying AI provider. The `ai_service` routes requests to the configured provider, allowing seamless switching between Gemini and Ollama without changing application logic.
+DevMate follows a provider-based architecture where Telegram handlers remain completely independent of the underlying AI model. The AI provider layer routes requests to the configured backend, making it easy to add new providers in the future.
 
-## 🧠 AI Providers
+---
 
-DevMate supports multiple AI providers through a unified service layer.
+# 🧠 AI Providers
 
-| Provider | Purpose                                                |
-| -------- | ------------------------------------------------------ |
-| Gemini   | Cloud AI with fast responses and strong reasoning      |
-| Ollama   | Local AI for offline development and unlimited testing |
+Switch between providers using environment variables.
 
-Switch providers by updating your environment configuration:
+### Gemini
 
 ```env
 AI_PROVIDER=gemini
 ```
 
-or
+### Ollama
 
 ```env
 AI_PROVIDER=ollama
-```
-
-For Ollama:
-
-```env
 OLLAMA_MODEL=llama3.2:3b
 ```
 
+---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```text
 DevMate/
+│
 ├── handlers/
 ├── services/
+├── prompts/
 ├── utils/
 ├── config.py
 ├── logger.py
 ├── main.py
+├── health_server.py
 ├── Dockerfile
 ├── compose.yaml
 ├── requirements.txt
 └── README.md
 ```
 
-## 🚀 Running Locally
+---
 
-### Clone the repository
+# 🚀 Getting Started
+
+## Clone
 
 ```bash
 git clone https://github.com/dev-krish/DevMate.git
+
 cd DevMate
 ```
 
-### Create a virtual environment
+---
+
+## Create Virtual Environment
 
 ```bash
-python3 -m venv .venv
+python -m venv .venv
+```
+
+Linux/macOS
+
+```bash
 source .venv/bin/activate
 ```
 
-### Install dependencies
+Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+---
+
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Configure environment variables
+---
+
+## Configure Environment
 
 ```bash
 cp .env.example .env
 ```
 
-Add your Telegram Bot Token to `.env`:
+Example:
 
 ```env
-BOT_TOKEN=your_bot_token_here
+BOT_TOKEN=your_bot_token
+
+AI_PROVIDER=gemini
+
+GEMINI_API_KEY=your_api_key
+
+OLLAMA_MODEL=llama3.2:3b
 ```
 
-### Start the bot
+---
+
+## Run
 
 ```bash
 python main.py
 ```
 
-## 🐳 Running with Docker
+---
+
+# 🐳 Docker
 
 ```bash
 docker compose up --build
 ```
 
-## 📦 Deployment
+---
 
-DevMate is containerized with Docker and can be deployed on platforms such as:
+# ☁ Deployment
 
-- Render
-- Railway
-- VPS
-- AWS EC2
-- Oracle Cloud
+DevMate can be deployed using Docker on:
 
-## 🗺️ Roadmap
+* Render
+* Railway
+* VPS
+* AWS EC2
+* Oracle Cloud
 
-- [x] Docker Support
-- [x] Cloud Deployment
-- [x] Structured Logging
-- [ ] QR Code Generator
-- [ ] Base64 Encoder/Decoder
-- [ ] JSON Formatter
-- [ ] GitHub Integration
-- [ ] AI Commands
+---
 
-## 🔮 Why DevMate ?
+# 🛣 Roadmap
 
-DevMate was built to provide developers with quick utilities directly inside Telegram. Instead of opening multiple websites or command-line tools, common development tasks can be completed with simple bot commands.
+## ✅ v0.2
 
-## 🤝 Contributing
+* AI Provider Abstraction
+* Conversation Memory
+* Interactive UI
+* Gemini Support
+* Ollama Support
+* Docker Deployment
+* Render Deployment
 
-Contributions, suggestions and feature requests are welcome.
+## 🚧 v0.3
 
-## 📄 License
+* AI Developer Commands
+* Code Review
+* Debug Assistant
+* Commit Message Generator
+* GitHub Integration
+
+## 🔮 Future
+
+* QR Code Generator
+* Base64 Utilities
+* JSON Formatter
+* Plugin System
+* Conversation Persistence
+* RAG Support
+
+---
+
+# 🤝 Contributing
+
+Contributions, feature requests and bug reports are always welcome.
+
+If you'd like to improve DevMate, feel free to fork the repository and submit a pull request.
+
+---
+
+# 📄 License
 
 This project is licensed under the MIT License.
 
 ---
 
-Made with ❤️ by Krishnendu Dutta.
+<p align="center">
+
+Made with ❤️ by **Krishnendu Dutta**
+
+If you found this project useful, consider giving it a ⭐ on GitHub!
+
+</p>
